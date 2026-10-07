@@ -38,7 +38,7 @@ Running log of what was inspected while authoring this curriculum. Date: 2026-07
 - `mayan/apps/metadata/models.py` (outline)
 - `mayan/apps/converter/classes.py` (outline)
 - `mayan/apps/testing/tests/base.py` and `testing/tests/mixins.py` (outlines)
-- `Makefile` (lines 1–60), `.gitlab-ci.yml` (lines 1–50), `docker/docker-compose.yml` (lines 1–30), `requirements.txt`, `requirements/base.txt` (lines 1–25), `mayan/settings/base.py` (lines 1–50), `mayan/urls/base.py`, `mayan/rest_api/urls.py`
+- `Makefile` (lines 1–60), `.gitlab-ci.yml` (lines 1–50), `docker/docker-compose.yml` (lines 1–30), `requirements.txt`, `requirements/base.txt` (lines 1–25), `mayan/settings/base.py` (lines 1–50), `mayan/urls/base.py`, `mayan/apps/rest_api/urls.py`
 
 ## Commands run
 
@@ -61,6 +61,14 @@ Running log of what was inspected while authoring this curriculum. Date: 2026-07
 6. **Checkout TOCTOU** — `DocumentCheckout.save()` does a check-then-act (`is_checked_out()` then `save()`); the `OneToOneField` makes the DB reject the loser with `IntegrityError`, not `DocumentAlreadyCheckedOut`. Static reading only.
 7. **`task_deindex_instance`** re-fetches the instance from the DB; if the row is already deleted when the worker runs, the `.get()` raises unhandled `DoesNotExist`. Where the deindex signal connects (pre vs post delete) was not fully traced.
 8. All behavior claims about Celery chords, retries, and locking semantics come from reading code and Celery 5.2.3 docs knowledge, not from observing the running system.
+
+## 2026-10-06 — accuracy pass against the committed snapshot
+
+Re-checked statically against `elirc/mastermayan` (commit `ddd91da`); nothing was installed or run. The tree now has git history in its own repository, so the "no git history" note above is stale.
+
+- The repo-root `__init__.py` is **empty**; the version constants (`4.3.1`, Django `3.2`) live in `mayan/__init__.py` (12 lines). The README, fast track and reading order linked the empty file and now point at `mayan/__init__.py`.
+- `./manage.py document_ocr_submit` and `./manage.py search_index_rebuild` in the command cheatsheet do not exist; replaced with the real `dynamic_search` commands and a note on how OCR is actually submitted.
+- All 1,021 relative Markdown links resolve and every `#Lx-Ly` anchor is within its file. In the sibling `docs/upskill/` curriculum, 330 links in sub-folder pages were one `../` too shallow (some silently resolved into the Sphinx `docs/` folder, such as `docs/Makefile`); they were corrected in the same pass.
 
 ## Areas not covered
 

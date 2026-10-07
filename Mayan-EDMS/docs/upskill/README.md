@@ -40,6 +40,16 @@ Mayan EDMS is a large Django application organized as many internal apps under `
 - Before each change, read the matching pattern card and testing recipe.
 - After each change, log what surprised you in [verification-log.md](./08-reference/verification-log.md).
 
+## Other curricula in this repo
+
+This repository holds three independently written AI curricula for the same Mayan EDMS v4.3.1 snapshot. They do not link to each other, so pick one as your spine:
+
+- `fabledocs/upskill/` — 53 files, aimed at a JS/TS engineer moving to Python/Django; includes the `08-interview-prep` module and a detailed verification log.
+- `docs/upskill/` — 46 files, written for juniors through seniors without assuming a JS background; interview material is a single chapter (`07-career-and-collaboration/04-interview-prep-from-this-repo.md`).
+- `gptdocs/` — 53 files with the same module layout as `fabledocs/upskill/`.
+
+All three cite real file and line ranges; their link checks were rerun on 2026-10-06.
+
 ## Learning tracks
 
 - `01-codebase-cartography`: repo shape, file order, domain vocabulary, major flows.

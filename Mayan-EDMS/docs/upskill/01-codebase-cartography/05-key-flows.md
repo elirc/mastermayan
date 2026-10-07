@@ -3,11 +3,11 @@
 ## Flow: Web form upload to document creation
 **Why this flow matters:** It is the shortest route from user intent to durable business state. It also shows ACL checks, task handoff, rollback, derived metadata, and signal-based follow-up in one path.
 **Open these files first:**
-- [`mayan/apps/sources/source_backends/web_form_backends.py`](../../mayan/apps/sources/source_backends/web_form_backends.py#L28-L72) - request-side permission gate and task enqueue.
-- [`mayan/apps/sources/tasks.py`](../../mayan/apps/sources/tasks.py#L58-L103) - worker-side shared upload handling and retry on DB operational errors.
-- [`mayan/apps/sources/models.py`](../../mayan/apps/sources/models.py#L87-L161) - async callback indirection and archive expansion.
-- [`mayan/apps/documents/models/document_type_models.py`](../../mayan/apps/documents/models/document_type_models.py#L138-L176) - document creation plus rollback if first file creation fails.
-- [`mayan/apps/documents/models/document_file_models.py`](../../mayan/apps/documents/models/document_file_models.py#L428-L505) - checksum, mimetype, page count, signals.
+- [`mayan/apps/sources/source_backends/web_form_backends.py`](../../../mayan/apps/sources/source_backends/web_form_backends.py#L28-L72) - request-side permission gate and task enqueue.
+- [`mayan/apps/sources/tasks.py`](../../../mayan/apps/sources/tasks.py#L58-L103) - worker-side shared upload handling and retry on DB operational errors.
+- [`mayan/apps/sources/models.py`](../../../mayan/apps/sources/models.py#L87-L161) - async callback indirection and archive expansion.
+- [`mayan/apps/documents/models/document_type_models.py`](../../../mayan/apps/documents/models/document_type_models.py#L138-L176) - document creation plus rollback if first file creation fails.
+- [`mayan/apps/documents/models/document_file_models.py`](../../../mayan/apps/documents/models/document_file_models.py#L428-L505) - checksum, mimetype, page count, signals.
 **Trace:**
 | Step | Owner | File | What happens | Data shape | Risk |
 | --- | --- | --- | --- | --- | --- |
@@ -18,12 +18,12 @@
 | 5 | Document type | `document_type_models.py` | create `Document`, then first file | `Document`, `DocumentFile` | partial create |
 | 6 | Document file save | `document_file_models.py` | compute derived fields, pages, signals | storage file, checksum, pages | expensive synchronous work in save |
 **Validation and authorization:**
-ACL filtering occurs before upload acceptance in [`web_form_backends.py`](../../mayan/apps/sources/source_backends/web_form_backends.py#L42-L50). The API upload path applies the same idea in [`document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L119-L129).
+ACL filtering occurs before upload acceptance in [`web_form_backends.py`](../../../mayan/apps/sources/source_backends/web_form_backends.py#L42-L50). The API upload path applies the same idea in [`document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L119-L129).
 **Persistence and side effects:**
-The request persists a `SharedUploadedFile` first [`web_form_backends.py`](../../mayan/apps/sources/source_backends/web_form_backends.py#L57-L70). Document and file persistence then occur in separate steps with explicit cleanup on failure [`document_type_models.py`](../../mayan/apps/documents/models/document_type_models.py#L163-L174). Post-save emits `signal_post_document_file_upload` and possibly `signal_post_document_created` [`document_file_models.py`](../../mayan/apps/documents/models/document_file_models.py#L492-L500).
+The request persists a `SharedUploadedFile` first [`web_form_backends.py`](../../../mayan/apps/sources/source_backends/web_form_backends.py#L57-L70). Document and file persistence then occur in separate steps with explicit cleanup on failure [`document_type_models.py`](../../../mayan/apps/documents/models/document_type_models.py#L163-L174). Post-save emits `signal_post_document_file_upload` and possibly `signal_post_document_created` [`document_file_models.py`](../../../mayan/apps/documents/models/document_file_models.py#L492-L500).
 **Tests that cover it:**
-- [`mayan/apps/sources/tests/test_web_form_source_api.py`](../../mayan/apps/sources/tests/test_web_form_source_api.py)
-- [`mayan/apps/sources/tests/test_web_form_source_views.py`](../../mayan/apps/sources/tests/test_web_form_source_views.py)
+- [`mayan/apps/sources/tests/test_web_form_source_api.py`](../../../mayan/apps/sources/tests/test_web_form_source_api.py)
+- [`mayan/apps/sources/tests/test_web_form_source_views.py`](../../../mayan/apps/sources/tests/test_web_form_source_views.py)
 **What juniors usually miss:**
 - The upload request does not directly create the final document file.
 - Permission is checked against `DocumentType`, not only against `Source`.
@@ -42,9 +42,9 @@ Trace what happens differently when `expand=True` and the upload is a zip.
 ## Flow: API document create/upload
 **Why this flow matters:** It shows the public contract exposed to external clients and how Mayan keeps API permissions aligned with browser behavior.
 **Open these files first:**
-- [`mayan/apps/documents/urls.py`](../../mayan/apps/documents/urls.py#L522-L564) - API route registration.
-- [`mayan/apps/documents/api_views/document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L64-L135) - list/create/upload views.
-- [`mayan/apps/rest_api/api_view_mixins.py`](../../mayan/apps/rest_api/api_view_mixins.py#L153-L172) - extra context and instance data injection.
+- [`mayan/apps/documents/urls.py`](../../../mayan/apps/documents/urls.py#L522-L564) - API route registration.
+- [`mayan/apps/documents/api_views/document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L64-L135) - list/create/upload views.
+- [`mayan/apps/rest_api/api_view_mixins.py`](../../../mayan/apps/rest_api/api_view_mixins.py#L153-L172) - extra context and instance data injection.
 **Trace:**
 | Step | Owner | File | What happens | Data shape | Risk |
 | --- | --- | --- | --- | --- | --- |
@@ -52,11 +52,11 @@ Trace what happens differently when `expand=True` and the upload is a zip.
 | 2 | API view | `document_api_views.py` | restrict `DocumentType` by ACL | `document_type_id` | IDOR if restriction removed |
 | 3 | Serializer/create path | serializer + model | create document and file | request payload | validation drift |
 **Validation and authorization:**
-`APIDocumentUploadView.perform_create()` restricts document types with `AccessControlList.objects.restrict_queryset(...)` before resolving the selected type [`document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L119-L129).
+`APIDocumentUploadView.perform_create()` restricts document types with `AccessControlList.objects.restrict_queryset(...)` before resolving the selected type [`document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L119-L129).
 **Persistence and side effects:**
 Uses the same document/domain models as the browser flow, so the same save hooks and signals apply.
 **Tests that cover it:**
-- [`mayan/apps/documents/tests/test_document_api.py`](../../mayan/apps/documents/tests/test_document_api.py)
+- [`mayan/apps/documents/tests/test_document_api.py`](../../../mayan/apps/documents/tests/test_document_api.py)
 **What juniors usually miss:**
 - API and browser routes share models but not necessarily identical request shapes.
 **What seniors notice:**
@@ -71,9 +71,9 @@ Compare API upload with source upload. What responsibilities are duplicated, and
 ## Flow: Object-level authorization with ACLs
 **Why this flow matters:** Mayan EDMS is multi-user and permission-heavy. If you do not understand ACL filtering, you will propose unsafe changes.
 **Open these files first:**
-- [`mayan/apps/acls/models.py`](../../mayan/apps/acls/models.py#L22-L118) - ACL data model.
-- [`mayan/apps/documents/models/document_type_models.py`](../../mayan/apps/documents/models/document_type_models.py#L114-L120) - ACL-restricted document counting.
-- [`mayan/apps/documents/api_views/document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L79-L86) - API enforcement example.
+- [`mayan/apps/acls/models.py`](../../../mayan/apps/acls/models.py#L22-L118) - ACL data model.
+- [`mayan/apps/documents/models/document_type_models.py`](../../../mayan/apps/documents/models/document_type_models.py#L114-L120) - ACL-restricted document counting.
+- [`mayan/apps/documents/api_views/document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L79-L86) - API enforcement example.
 **Trace:**
 | Step | Owner | File | What happens | Data shape | Risk |
 | --- | --- | --- | --- | --- | --- |
@@ -83,10 +83,10 @@ Compare API upload with source upload. What responsibilities are duplicated, and
 **Validation and authorization:**
 Authorization is not centralized in one middleware. It is repeatedly enforced via queryset restriction and method-level permission declarations.
 **Persistence and side effects:**
-ACL permission add/remove commits edit events [`acls/models.py`](../../mayan/apps/acls/models.py#L88-L104).
+ACL permission add/remove commits edit events [`acls/models.py`](../../../mayan/apps/acls/models.py#L88-L104).
 **Tests that cover it:**
-- [`mayan/apps/documents/tests/test_permissions.py`](../../mayan/apps/documents/tests/test_permissions.py)
-- [`mayan/apps/cabinets/tests/test_api.py`](../../mayan/apps/cabinets/tests/test_api.py)
+- [`mayan/apps/documents/tests/test_permissions.py`](../../../mayan/apps/documents/tests/test_permissions.py)
+- [`mayan/apps/cabinets/tests/test_api.py`](../../../mayan/apps/cabinets/tests/test_api.py)
 **What juniors usually miss:**
 - Looking up by primary key before ACL restriction is an IDOR trap.
 **What seniors notice:**
@@ -101,8 +101,8 @@ Find two more uses of `restrict_queryset` and describe what object is being prot
 ## Flow: Document file metadata extraction
 **Why this flow matters:** It is a clean example of event submission, lock-based concurrency control, and async enrichment that does not block user requests.
 **Open these files first:**
-- [`mayan/apps/file_metadata/methods.py`](../../mayan/apps/file_metadata/methods.py#L7-L28) - submit method.
-- [`mayan/apps/file_metadata/tasks.py`](../../mayan/apps/file_metadata/tasks.py#L17-L48) - worker logic.
+- [`mayan/apps/file_metadata/methods.py`](../../../mayan/apps/file_metadata/methods.py#L7-L28) - submit method.
+- [`mayan/apps/file_metadata/tasks.py`](../../../mayan/apps/file_metadata/tasks.py#L17-L48) - worker logic.
 **Trace:**
 | Step | Owner | File | What happens | Data shape | Risk |
 | --- | --- | --- | --- | --- | --- |
@@ -114,8 +114,8 @@ This flow assumes authorization happened before submission; task execution itsel
 **Persistence and side effects:**
 Enrichment is persisted by the driver layer; task layer mainly schedules and guards concurrency.
 **Tests that cover it:**
-- [`mayan/apps/file_metadata/tests/test_classes.py`](../../mayan/apps/file_metadata/tests/test_classes.py)
-- [`mayan/apps/file_metadata/tests/test_indexing.py`](../../mayan/apps/file_metadata/tests/test_indexing.py)
+- [`mayan/apps/file_metadata/tests/test_classes.py`](../../../mayan/apps/file_metadata/tests/test_classes.py)
+- [`mayan/apps/file_metadata/tests/test_indexing.py`](../../../mayan/apps/file_metadata/tests/test_indexing.py)
 **What juniors usually miss:**
 - Locks are about correctness, not only performance.
 **What seniors notice:**
@@ -130,8 +130,8 @@ Explain why `user_id` is passed to the task instead of a full user object.
 ## Flow: Parsing extracted text from document files
 **Why this flow matters:** Searchability and text introspection depend on parsing. This is also a good contrast with OCR: parsing operates on files, OCR on pages/images.
 **Open these files first:**
-- [`mayan/apps/document_parsing/methods.py`](../../mayan/apps/document_parsing/methods.py#L16-L49)
-- [`mayan/apps/document_parsing/tasks.py`](../../mayan/apps/document_parsing/tasks.py#L11-L34)
+- [`mayan/apps/document_parsing/methods.py`](../../../mayan/apps/document_parsing/methods.py#L16-L49)
+- [`mayan/apps/document_parsing/tasks.py`](../../../mayan/apps/document_parsing/tasks.py#L11-L34)
 **Trace:**
 | Step | Owner | File | What happens | Data shape | Risk |
 | --- | --- | --- | --- | --- | --- |
@@ -142,7 +142,7 @@ Authorization is out-of-band here; task starts after an already-authorized actio
 **Persistence and side effects:**
 Page content is persisted through the manager invoked in the task.
 **Tests that cover it:**
-- Search and parsing tests under [`mayan/apps/document_parsing/tests/`](../../mayan/apps/document_parsing/tests/)
+- Search and parsing tests under [`mayan/apps/document_parsing/tests/`](../../../mayan/apps/document_parsing/tests/)
 **What juniors usually miss:**
 - Parsing content is not the same as file metadata and not the same as OCR.
 **What seniors notice:**
@@ -157,7 +157,7 @@ Compare the parsing task signature to the file metadata task signature. Why are 
 ## Flow: OCR fan-out and finish callback
 **Why this flow matters:** It is the repo’s clearest async orchestration example: split by page, retry page work, then emit a finish event.
 **Open these files first:**
-- [`mayan/apps/ocr/tasks.py`](../../mayan/apps/ocr/tasks.py#L17-L131) - page fan-out, retries, finish.
+- [`mayan/apps/ocr/tasks.py`](../../../mayan/apps/ocr/tasks.py#L17-L131) - page fan-out, retries, finish.
 **Trace:**
 | Step | Owner | File | What happens | Data shape | Risk |
 | --- | --- | --- | --- | --- | --- |
@@ -167,9 +167,9 @@ Compare the parsing task signature to the file metadata task signature. Why are 
 **Validation and authorization:**
 Triggered after an allowed action; tasks rely on internal trust boundaries.
 **Persistence and side effects:**
-Writes OCR content and error logs, then emits `event_ocr_document_version_finished` [`ocr/tasks.py`](../../mayan/apps/ocr/tasks.py#L114-L125).
+Writes OCR content and error logs, then emits `event_ocr_document_version_finished` [`ocr/tasks.py`](../../../mayan/apps/ocr/tasks.py#L114-L125).
 **Tests that cover it:**
-- [`mayan/apps/ocr/tests/`](../../mayan/apps/ocr/tests/)
+- [`mayan/apps/ocr/tests/`](../../../mayan/apps/ocr/tests/)
 **What juniors usually miss:**
 - Retryable exceptions are selective.
 - Success cleanup is explicit, not automatic.
@@ -185,7 +185,7 @@ List every retryable exception in the page task and explain what system pressure
 ## Flow: Document checkout invariant
 **Why this flow matters:** It is a compact example of domain rules living in a model instead of in a controller.
 **Open these files first:**
-- [`mayan/apps/checkouts/models.py`](../../mayan/apps/checkouts/models.py#L28-L116)
+- [`mayan/apps/checkouts/models.py`](../../../mayan/apps/checkouts/models.py#L28-L116)
 **Trace:**
 | Step | Owner | File | What happens | Data shape | Risk |
 | --- | --- | --- | --- | --- | --- |
@@ -197,7 +197,7 @@ Validation happens in `clean()` and `save()`; authorization is elsewhere.
 **Persistence and side effects:**
 Save emits checkout event; delete chooses between checked-in, forceful, or auto event types.
 **Tests that cover it:**
-- [`mayan/apps/checkouts/tests/`](../../mayan/apps/checkouts/tests/)
+- [`mayan/apps/checkouts/tests/`](../../../mayan/apps/checkouts/tests/)
 **What juniors usually miss:**
 - `OneToOneField` is not the only invariant; save logic still matters.
 **What seniors notice:**
@@ -212,9 +212,9 @@ Explain why the event type is decided at delete time instead of later in reporti
 ## Flow: Login and multi-factor escalation
 **Why this flow matters:** It shows authentication flow control, session handoff, and public-route exceptions in a mostly login-required system.
 **Open these files first:**
-- [`mayan/apps/authentication/django_authentication_backends.py`](../../mayan/apps/authentication/django_authentication_backends.py#L7-L21) - email backend and timing defense.
-- [`mayan/apps/authentication/views/authentication_views.py`](../../mayan/apps/authentication/views/authentication_views.py#L45-L145) - MFA wizard.
-- [`mayan/settings/base.py`](../../mayan/settings/base.py#L108-L123) - `LoginRequiredMiddleware` and CSRF middleware.
+- [`mayan/apps/authentication/django_authentication_backends.py`](../../../mayan/apps/authentication/django_authentication_backends.py#L7-L21) - email backend and timing defense.
+- [`mayan/apps/authentication/views/authentication_views.py`](../../../mayan/apps/authentication/views/authentication_views.py#L45-L145) - MFA wizard.
+- [`mayan/settings/base.py`](../../../mayan/settings/base.py#L108-L123) - `LoginRequiredMiddleware` and CSRF middleware.
 **Trace:**
 | Step | Owner | File | What happens | Data shape | Risk |
 | --- | --- | --- | --- | --- | --- |
@@ -226,8 +226,8 @@ Public access is explicit via `StrongholdPublicMixin` and `@public` on auth view
 **Persistence and side effects:**
 Writes session state and may send password-reset emails in the reset flow.
 **Tests that cover it:**
-- [`mayan/apps/authentication/tests/test_login_views.py`](../../mayan/apps/authentication/tests/test_login_views.py)
-- [`mayan/apps/authentication_otp/tests/test_views.py`](../../mayan/apps/authentication_otp/tests/test_views.py)
+- [`mayan/apps/authentication/tests/test_login_views.py`](../../../mayan/apps/authentication/tests/test_login_views.py)
+- [`mayan/apps/authentication_otp/tests/test_views.py`](../../../mayan/apps/authentication_otp/tests/test_views.py)
 **What juniors usually miss:**
 - The app defaults to login-required globally; auth pages are exceptions.
 **What seniors notice:**

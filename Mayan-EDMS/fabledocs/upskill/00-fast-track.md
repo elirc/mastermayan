@@ -34,7 +34,7 @@ make test-all                             # everything (slow)
 
 Open these in order; each takes 5–15 minutes. Full reading order with junior/mid/senior paths: [01-codebase-cartography/02-file-reading-order.md](01-codebase-cartography/02-file-reading-order.md).
 
-1. [__init__.py](../../__init__.py) — version, Django version. You are reading a 2022-era snapshot; expect `ugettext_lazy` and `url()` regex routing.
+1. [mayan/__init__.py](../../mayan/__init__.py) — version, Django version (the repo-root `__init__.py` is empty; `__init__.py.tmpl` is the release template). You are reading a 2022-era snapshot; expect `ugettext_lazy` and `url()` regex routing.
 2. [mayan/settings/base.py](../../mayan/settings/base.py#L1-L60) — settings are *generated* through a `SettingNamespaceSingleton`, not hand-written constants. Environment variables prefixed `MAYAN_` override them.
 3. [mayan/apps/common/apps.py](../../mayan/apps/common/apps.py#L27-L120) — `MayanAppConfig.configure_urls()`: every app self-registers its URLs at startup into an initially **empty** [mayan/urls/base.py](../../mayan/urls/base.py). This one file explains how 57 apps compose into one site.
 4. [mayan/apps/documents/models/document_models.py](../../mayan/apps/documents/models/document_models.py#L41-L108) — the `Document` model: UUID, type, `in_trash`, `is_stub`, and three managers (`objects`, `trash`, `valid`).

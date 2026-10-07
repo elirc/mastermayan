@@ -4,7 +4,7 @@ Thirty files, ordered so each one makes the next legible. Per file: why it matte
 
 ## Phase 1 — orientation (everyone)
 
-1. [__init__.py](../../../__init__.py) — v4.3.1, Django 3.2. *Look for:* `__build__` scheme. *Skip:* nothing, it's 10 lines.
+1. [mayan/__init__.py](../../../mayan/__init__.py) — v4.3.1, Django 3.2. *Look for:* `__build__` scheme. *Skip:* nothing, it's 12 lines.
 2. [README.md](../../../README.md) — product identity. *Skip:* badge wall.
 3. [Makefile](../../../Makefile#L1-L60) — how tests actually run (`manage.py test` + testing settings + `--skip-migrations` default). *Look for:* `MODULE=` targeting.
 4. [mayan/settings/base.py](../../../mayan/settings/base.py#L18-L38) — the `SettingNamespaceSingleton` generating settings from env vars; the SECRET_KEY file fallback. *Senior lens:* settings-as-code-registry means `grep MAYAN_` beats reading this file.

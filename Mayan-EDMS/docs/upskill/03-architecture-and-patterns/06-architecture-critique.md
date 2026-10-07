@@ -16,18 +16,18 @@
 
 ### Confirmed risk
 
-- `DocumentFile.save()` does expensive work synchronously after insert [`document_file_models.py`](../../mayan/apps/documents/models/document_file_models.py#L460-L484).
+- `DocumentFile.save()` does expensive work synchronously after insert [`document_file_models.py`](../../../mayan/apps/documents/models/document_file_models.py#L460-L484).
   Likely impact: latency and harder debugging around upload failures.
 
 ### Hypothesis to investigate
 
-- Signal-driven indexing may amplify load during bulk document operations [`document_indexing/handlers.py`](../../mayan/apps/document_indexing/handlers.py#L71-L83).
+- Signal-driven indexing may amplify load during bulk document operations [`document_indexing/handlers.py`](../../../mayan/apps/document_indexing/handlers.py#L71-L83).
   Confidence: medium.
 
 ### Hypothesis to investigate
 
 - Shared upload cleanup may be vulnerable to orphan accumulation when downstream failures happen after staging.
-  Evidence: temp upload deletion occurs after `handle_file_object_upload()` returns in [`sources/tasks.py`](../../mayan/apps/sources/tasks.py#L95-L103).
+  Evidence: temp upload deletion occurs after `handle_file_object_upload()` returns in [`sources/tasks.py`](../../../mayan/apps/sources/tasks.py#L95-L103).
 
 ## If I owned this repo for 3 months
 

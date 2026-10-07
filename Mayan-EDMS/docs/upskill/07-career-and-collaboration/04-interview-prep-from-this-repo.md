@@ -9,9 +9,9 @@ Use this repo as proof that you can reason about production Python and practical
 - Junior answer:
   "A view gets a file and saves it."
 - Mid-level answer adds:
-  ACL-filtered document-type selection in [`web_form_backends.py`](../../mayan/apps/sources/source_backends/web_form_backends.py#L42-L50), staged upload creation in [`web_form_backends.py`](../../mayan/apps/sources/source_backends/web_form_backends.py#L57-L70), worker rehydration in [`sources/tasks.py`](../../mayan/apps/sources/tasks.py#L64-L87), and rollback in [`document_type_models.py`](../../mayan/apps/documents/models/document_type_models.py#L163-L174).
+  ACL-filtered document-type selection in [`web_form_backends.py`](../../../mayan/apps/sources/source_backends/web_form_backends.py#L42-L50), staged upload creation in [`web_form_backends.py`](../../../mayan/apps/sources/source_backends/web_form_backends.py#L57-L70), worker rehydration in [`sources/tasks.py`](../../../mayan/apps/sources/tasks.py#L64-L87), and rollback in [`document_type_models.py`](../../../mayan/apps/documents/models/document_type_models.py#L163-L174).
 - Senior answer includes:
-  request/worker contract, blast radius of synchronous derived work in [`document_file_models.py`](../../mayan/apps/documents/models/document_file_models.py#L460-L484), observability gaps, and a rollback or cleanup story.
+  request/worker contract, blast radius of synchronous derived work in [`document_file_models.py`](../../../mayan/apps/documents/models/document_file_models.py#L460-L484), observability gaps, and a rollback or cleanup story.
 
 ### Question: Where would you put business logic in Python?
 
@@ -21,7 +21,7 @@ Use this repo as proof that you can reason about production Python and practical
 ### Question: Explain idempotency with a real example.
 
 - Good answer anchor:
-  lock-based file metadata processing in [`file_metadata/tasks.py`](../../mayan/apps/file_metadata/tasks.py#L31-L48)
+  lock-based file metadata processing in [`file_metadata/tasks.py`](../../../mayan/apps/file_metadata/tasks.py#L31-L48)
 
 ## JavaScript/framework questions
 
@@ -30,13 +30,13 @@ Use this repo as proof that you can reason about production Python and practical
 - Junior answer:
   "Bind the click handler once."
 - Mid-level answer adds:
-  delegated event handling on `body` in [`partial_navigation.js`](../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L273-L280) because AJAX replaces content.
+  delegated event handling on `body` in [`partial_navigation.js`](../../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L273-L280) because AJAX replaces content.
 - Senior answer includes:
   tradeoffs of delegation, bubbling behavior, and how partial navigation reshapes ownership.
 
 ### Question: How do you handle AJAX race conditions?
 
-- Use request cancellation and throttling in [`partial_navigation.js`](../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L96-L115).
+- Use request cancellation and throttling in [`partial_navigation.js`](../../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L96-L115).
 - Senior addition:
   mention user-visible stale response risks and the distinction between client cancellation and server-side work that may already have started.
 
@@ -45,12 +45,12 @@ Use this repo as proof that you can reason about production Python and practical
 ### Question: An upload returns `202` but nothing shows up. What do you do?
 
 - Strong answer:
-  separate request path from worker path, inspect `SharedUploadedFile`, check retry/log behavior in [`sources/tasks.py`](../../mayan/apps/sources/tasks.py#L88-L103), and verify downstream `DocumentFile.save()` side effects.
+  separate request path from worker path, inspect `SharedUploadedFile`, check retry/log behavior in [`sources/tasks.py`](../../../mayan/apps/sources/tasks.py#L88-L103), and verify downstream `DocumentFile.save()` side effects.
 
 ### Question: A permission bug lets the wrong user mutate data. Where do you look first?
 
 - Strong answer:
-  find the first raw object lookup and compare it to established ACL-filter patterns in [`document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L79-L86).
+  find the first raw object lookup and compare it to established ACL-filter patterns in [`document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L79-L86).
 
 ## System design questions
 
@@ -65,7 +65,7 @@ Use this repo as proof that you can reason about production Python and practical
 
 ### Question: How would you scale OCR?
 
-- Use [`ocr/tasks.py`](../../mayan/apps/ocr/tasks.py#L30-L43) to discuss page-level parallelism.
+- Use [`ocr/tasks.py`](../../../mayan/apps/ocr/tasks.py#L30-L43) to discuss page-level parallelism.
 - Senior addition:
   backpressure, queue isolation, metrics, and completion semantics.
 

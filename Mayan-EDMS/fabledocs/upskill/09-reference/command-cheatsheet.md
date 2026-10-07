@@ -51,10 +51,11 @@ Under the hood the test command is `./manage.py test $MODULE --settings=mayan.se
 | --- | --- |
 | `./manage.py performupgrade` | run upgrade steps after a version bump |
 | `./manage.py purgelocks` | clear stuck distributed locks (lock_manager) |
-| `./manage.py document_ocr_submit` | (re)submit documents for OCR (management commands in `ocr/management/`) |
-| `./manage.py search_index_rebuild` | rebuild the search index (dynamic_search management) — verify exact name in the app |
+| `./manage.py search_initialize` / `search_index_objects` / `search_status` | set up, (re)index and inspect the search backend (`mayan/apps/dynamic_search/management/commands/`) |
 
-Management command names above are `inferred` from app conventions; confirm with `./manage.py help` before relying on them.
+There is no OCR management command in this snapshot (`mayan/apps/ocr/` has no `management/` folder). OCR is submitted per document through the `submit_for_ocr` method (`mayan/apps/ocr/methods.py:19`, registered in `ocr/apps.py:80`), which the UI and API call. `performupgrade` and `purgelocks` do exist, alongside their newer names `common_perform_upgrade` and `lock_manager_purge_locks` (checked 2026-10-06).
+
+The command names above were checked against the `management/commands/` folders on 2026-10-06; confirm with `./manage.py help` once you have a working environment.
 
 ## Quick probes for debugging (inferred, run in `./manage.py shell`)
 

@@ -4,7 +4,7 @@ A learning suite that turns this repository into a training lab for a **junior f
 
 ## What this repo is
 
-Mayan EDMS v4.3.1 ([version constants](../../__init__.py#L1-L10)) is a mature, self-hosted **electronic document management system**: upload documents, OCR them, tag them, index them, route them through approval workflows, and control who sees what down to the individual object. It is a single deployable **Django 3.2** application split into **57 pluggable Django apps** under [mayan/apps/](../../mayan/apps/), not a JS monorepo — which is exactly why it is a good gym: you will map serializers to your DTOs, Celery workers to your job queues, and Django templates to server-rendered UI, and in doing so learn the ideas rather than the framework incantations. Its three signature subsystems are: object-level **ACLs** enforced by queryset filtering ([acls/managers.py](../../mayan/apps/acls/managers.py#L268-L294)), an **event system** driven by decorators on model methods ([events/decorators.py](../../mayan/apps/events/decorators.py#L8-L33)), and a four-tier **Celery worker topology** where every slow operation is a queued task ([task_manager/workers.py](../../mayan/apps/task_manager/workers.py#L12-L36)). Storage is pluggable (filesystem/S3-style), search is pluggable (Whoosh/Elasticsearch), and even upload sources (web form, watch folder, email inbox, scanner) are plugin backends.
+Mayan EDMS v4.3.1 ([version constants](../../mayan/__init__.py#L1-L12)) is a mature, self-hosted **electronic document management system**: upload documents, OCR them, tag them, index them, route them through approval workflows, and control who sees what down to the individual object. It is a single deployable **Django 3.2** application split into **57 pluggable Django apps** under [mayan/apps/](../../mayan/apps/), not a JS monorepo — which is exactly why it is a good gym: you will map serializers to your DTOs, Celery workers to your job queues, and Django templates to server-rendered UI, and in doing so learn the ideas rather than the framework incantations. Its three signature subsystems are: object-level **ACLs** enforced by queryset filtering ([acls/managers.py](../../mayan/apps/acls/managers.py#L268-L294)), an **event system** driven by decorators on model methods ([events/decorators.py](../../mayan/apps/events/decorators.py#L8-L33)), and a four-tier **Celery worker topology** where every slow operation is a queued task ([task_manager/workers.py](../../mayan/apps/task_manager/workers.py#L12-L36)). Storage is pluggable (filesystem/S3-style), search is pluggable (Whoosh/Elasticsearch), and even upload sources (web form, watch folder, email inbox, scanner) are plugin backends.
 
 ## How to use this curriculum
 
@@ -30,6 +30,16 @@ Recommended reading order per learner:
 - **Verification labels**: commands are marked `verified` (actually run) or `inferred` (read from Makefile/CI/docs but not executed — the norm here, since this Django 3.2 app can't run on the authoring machine's Python 3.13). Bug-shaped observations are labeled *investigate* or *possible risk*, never asserted as bugs. See the [verification log](09-reference/verification-log.md).
 - **Drills with self-grading**: most sections end with a task and a Basic/Solid/Strong rubric. Grade yourself honestly; "Strong" is the mid-level interview bar.
 - **Interview angle**: sections flag how the material shows up in interviews and cross-link into [08-interview-prep/](08-interview-prep/README.md).
+
+## Other curricula in this repo
+
+This repository holds three independently written AI curricula for the same Mayan EDMS v4.3.1 snapshot. They do not link to each other, so pick one as your spine:
+
+- `fabledocs/upskill/` — 53 files, aimed at a JS/TS engineer moving to Python/Django; includes the `08-interview-prep` module and a detailed verification log.
+- `docs/upskill/` — 46 files, written for juniors through seniors without assuming a JS background; interview material is a single chapter (`07-career-and-collaboration/04-interview-prep-from-this-repo.md`).
+- `gptdocs/` — 53 files with the same module layout as `fabledocs/upskill/`.
+
+All three cite real file and line ranges; their link checks were rerun on 2026-10-06.
 
 ## The learning tracks
 

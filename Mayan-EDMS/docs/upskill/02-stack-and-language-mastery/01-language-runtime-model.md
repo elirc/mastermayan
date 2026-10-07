@@ -8,9 +8,9 @@ Why it matters in production: If you treat Django models like passive records, y
 
 Real code:
 
-- Document creation orchestration in [`document_type_models.py`](../../mayan/apps/documents/models/document_type_models.py#L138-L176)
-- Document file save lifecycle in [`document_file_models.py`](../../mayan/apps/documents/models/document_file_models.py#L428-L505)
-- Checkout invariant in [`checkouts/models.py`](../../mayan/apps/checkouts/models.py#L68-L116)
+- Document creation orchestration in [`document_type_models.py`](../../../mayan/apps/documents/models/document_type_models.py#L138-L176)
+- Document file save lifecycle in [`document_file_models.py`](../../../mayan/apps/documents/models/document_file_models.py#L428-L505)
+- Checkout invariant in [`checkouts/models.py`](../../../mayan/apps/checkouts/models.py#L68-L116)
 
 Failure modes:
 
@@ -36,10 +36,10 @@ Why it matters in production: serializing live objects across process boundaries
 
 Real code:
 
-- [`sources/tasks.py`](../../mayan/apps/sources/tasks.py#L58-L103)
-- [`file_metadata/tasks.py`](../../mayan/apps/file_metadata/tasks.py#L17-L48)
-- [`document_parsing/tasks.py`](../../mayan/apps/document_parsing/tasks.py#L11-L34)
-- [`ocr/tasks.py`](../../mayan/apps/ocr/tasks.py#L17-L131)
+- [`sources/tasks.py`](../../../mayan/apps/sources/tasks.py#L58-L103)
+- [`file_metadata/tasks.py`](../../../mayan/apps/file_metadata/tasks.py#L17-L48)
+- [`document_parsing/tasks.py`](../../../mayan/apps/document_parsing/tasks.py#L11-L34)
+- [`ocr/tasks.py`](../../../mayan/apps/ocr/tasks.py#L17-L131)
 
 Pitfall checklist:
 
@@ -54,9 +54,9 @@ Concept: the JS surface is older jQuery-style event orchestration, not React. St
 
 Real code:
 
-- AJAX navigation and throttling in [`partial_navigation.js`](../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L87-L152)
-- UI event wiring in [`mayan_app.js`](../../mayan/apps/appearance/static/appearance/js/mayan_app.js#L53-L69) and [`mayan_app.js`](../../mayan/apps/appearance/static/appearance/js/mayan_app.js#L367-L420)
-- form affordances in [`metadata_form.js`](../../mayan/apps/metadata/static/metadata/js/metadata_form.js#L3-L8) and [`tags_form.js`](../../mayan/apps/tags/static/tags/js/tags_form.js#L3-L24)
+- AJAX navigation and throttling in [`partial_navigation.js`](../../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L87-L152)
+- UI event wiring in [`mayan_app.js`](../../../mayan/apps/appearance/static/appearance/js/mayan_app.js#L53-L69) and [`mayan_app.js`](../../../mayan/apps/appearance/static/appearance/js/mayan_app.js#L367-L420)
+- form affordances in [`metadata_form.js`](../../../mayan/apps/metadata/static/metadata/js/metadata_form.js#L3-L8) and [`tags_form.js`](../../../mayan/apps/tags/static/tags/js/tags_form.js#L3-L24)
 
 Why it matters: interview prep often focuses on modern frameworks, but mid-level judgment includes understanding event delegation, AJAX race handling, and DOM-driven state in legacy but still valuable code.
 

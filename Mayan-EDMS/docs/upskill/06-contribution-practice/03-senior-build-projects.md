@@ -4,7 +4,7 @@
 Problem statement: Async `202` upload acceptance hides downstream failure modes.
 Product value: Faster support and safer operations.
 Design checklist: correlation ids, temp upload lifecycle, callback visibility, privacy-safe logs.
-Likely files/modules: [`sources/tasks.py`](../../mayan/apps/sources/tasks.py), [`sources/models.py`](../../mayan/apps/sources/models.py)
+Likely files/modules: [`sources/tasks.py`](../../../mayan/apps/sources/tasks.py), [`sources/models.py`](../../../mayan/apps/sources/models.py)
 Migration plan: no-schema logging first, metrics second.
 Test plan: upload success/failure integration tests.
 Security plan: no file contents in logs.
@@ -16,7 +16,7 @@ Open questions: what is the canonical upload correlation key?
 Problem statement: `DocumentFile.save()` coordinates persistence, derived fields, and follow-on behavior.
 Product value: lower latency, clearer ownership, easier debugging.
 Design checklist: ordering, idempotency, backward compatibility, visibility.
-Likely files/modules: [`document_file_models.py`](../../mayan/apps/documents/models/document_file_models.py), related tasks and signals.
+Likely files/modules: [`document_file_models.py`](../../../mayan/apps/documents/models/document_file_models.py), related tasks and signals.
 Migration plan: instrument first, then move one responsibility at a time.
 Test plan: upload regression suite, failure-path tests, derived-field correctness.
 Security plan: preserve audit/user context.
@@ -40,7 +40,7 @@ Open questions: which signal chains are most incident-prone?
 Problem statement: temp uploads are a critical reliability seam.
 Product value: better storage hygiene and debugging.
 Design checklist: active-vs-orphan distinction, retention, operator UX.
-Likely files/modules: [`sources/tasks.py`](../../mayan/apps/sources/tasks.py), storage models, management commands.
+Likely files/modules: [`sources/tasks.py`](../../../mayan/apps/sources/tasks.py), storage models, management commands.
 Migration plan: reporting first, cleanup automation second.
 Test plan: failure-path tests and orphan-detection tests.
 Security plan: avoid leaking file names to unauthorized viewers.

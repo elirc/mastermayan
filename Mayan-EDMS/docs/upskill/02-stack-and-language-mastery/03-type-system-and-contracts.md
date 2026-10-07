@@ -6,11 +6,11 @@ This repo is Python-first, so contracts are mostly enforced by runtime validatio
 
 | Layer | Example | Contract form |
 | --- | --- | --- |
-| ORM schema | [`document_models.py`](../../mayan/apps/documents/models/document_models.py#L53-L104) | field types, nullability, indexes |
-| Runtime validation | [`checkouts/models.py`](../../mayan/apps/checkouts/models.py#L68-L72) | `clean()` |
-| Serializer/API contract | [`document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L113-L135) | serializer-driven request shape |
-| Permission contract | [`document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L32-L37) | per-method permission map |
-| YAML plugin config | [`document_type_models.py`](../../mayan/apps/documents/models/document_type_models.py#L70-L76) | validated text config |
+| ORM schema | [`document_models.py`](../../../mayan/apps/documents/models/document_models.py#L53-L104) | field types, nullability, indexes |
+| Runtime validation | [`checkouts/models.py`](../../../mayan/apps/checkouts/models.py#L68-L72) | `clean()` |
+| Serializer/API contract | [`document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L113-L135) | serializer-driven request shape |
+| Permission contract | [`document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L32-L37) | per-method permission map |
+| YAML plugin config | [`document_type_models.py`](../../../mayan/apps/documents/models/document_type_models.py#L70-L76) | validated text config |
 
 ## What a mid-level engineer should internalize
 

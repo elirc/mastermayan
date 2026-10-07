@@ -6,7 +6,7 @@
 - removes `restrict_queryset`
 - loads `DocumentType` directly by pk
 **Files this resembles:**
-- [`document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L119-L129)
+- [`document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L119-L129)
 **Your task:** Review this PR.
 **Expected findings:**
 Blocking:
@@ -24,8 +24,8 @@ Optional:
 - calls metadata driver directly from request view
 - removes async task submission
 **Files this resembles:**
-- [`mayan/apps/file_metadata/methods.py`](../../mayan/apps/file_metadata/methods.py#L14-L28)
-- [`mayan/apps/file_metadata/tasks.py`](../../mayan/apps/file_metadata/tasks.py#L17-L48)
+- [`mayan/apps/file_metadata/methods.py`](../../../mayan/apps/file_metadata/methods.py#L14-L28)
+- [`mayan/apps/file_metadata/tasks.py`](../../../mayan/apps/file_metadata/tasks.py#L17-L48)
 **Your task:** Review this PR.
 **Expected findings:**
 Blocking:
@@ -41,7 +41,7 @@ Optional:
 **Fake diff summary:**
 - replaces delegated handlers with direct bindings on page load
 **Files this resembles:**
-- [`mayan/apps/appearance/static/appearance/js/partial_navigation.js`](../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L273-L280)
+- [`mayan/apps/appearance/static/appearance/js/partial_navigation.js`](../../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L273-L280)
 **Your task:** Review this PR.
 **Expected findings:**
 Blocking:
@@ -56,7 +56,7 @@ Important:
 **Fake diff summary:**
 - broad `except Exception: return`
 **Files this resembles:**
-- [`mayan/apps/ocr/tasks.py`](../../mayan/apps/ocr/tasks.py#L75-L89)
+- [`mayan/apps/ocr/tasks.py`](../../../mayan/apps/ocr/tasks.py#L75-L89)
 **Your task:** Review this PR.
 **Expected findings:**
 Blocking:
@@ -72,7 +72,7 @@ Important:
 - bypasses model `save()`
 - inserts checkout rows directly
 **Files this resembles:**
-- [`mayan/apps/checkouts/models.py`](../../mayan/apps/checkouts/models.py#L100-L116)
+- [`mayan/apps/checkouts/models.py`](../../../mayan/apps/checkouts/models.py#L100-L116)
 **Your task:** Review this PR.
 **Expected findings:**
 Blocking:
@@ -87,7 +87,7 @@ Important:
 **Fake diff summary:**
 - callback runs before `DocumentFile` is fully initialized
 **Files this resembles:**
-- [`mayan/apps/sources/models.py`](../../mayan/apps/sources/models.py#L45-L65)
+- [`mayan/apps/sources/models.py`](../../../mayan/apps/sources/models.py#L45-L65)
 **Your task:** Review this PR.
 **Expected findings:**
 Blocking:
@@ -102,7 +102,7 @@ Important:
 **Fake diff summary:**
 - removes `shared_uploaded_file.delete()`
 **Files this resembles:**
-- [`mayan/apps/sources/tasks.py`](../../mayan/apps/sources/tasks.py#L95-L103)
+- [`mayan/apps/sources/tasks.py`](../../../mayan/apps/sources/tasks.py#L95-L103)
 **Your task:** Review this PR.
 **Expected findings:**
 Important:
@@ -117,8 +117,8 @@ Optional:
 **Fake diff summary:**
 - strips CSRF and weakens auth-flow protections
 **Files this resembles:**
-- [`mayan/apps/authentication/views/authentication_views.py`](../../mayan/apps/authentication/views/authentication_views.py#L277-L302)
-- [`mayan/settings/base.py`](../../mayan/settings/base.py#L108-L115)
+- [`mayan/apps/authentication/views/authentication_views.py`](../../../mayan/apps/authentication/views/authentication_views.py#L277-L302)
+- [`mayan/settings/base.py`](../../../mayan/settings/base.py#L108-L115)
 **Your task:** Review this PR.
 **Expected findings:**
 Blocking:

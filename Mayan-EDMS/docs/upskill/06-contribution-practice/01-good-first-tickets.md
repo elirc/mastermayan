@@ -10,8 +10,8 @@
 - [ ] docs mention `SharedUploadedFile` purpose
 - [ ] docs mention worker cleanup point
 **Read these anchors first:**
-- [`web_form_backends.py`](../../mayan/apps/sources/source_backends/web_form_backends.py#L57-L70)
-- [`sources/tasks.py`](../../mayan/apps/sources/tasks.py#L95-L103)
+- [`web_form_backends.py`](../../../mayan/apps/sources/source_backends/web_form_backends.py#L57-L70)
+- [`sources/tasks.py`](../../../mayan/apps/sources/tasks.py#L95-L103)
 **Files likely touched:** docs only
 **Implementation plan:** trace lifecycle, then document verified behavior only.
 **What could go wrong:** overstating guarantees not verified in code.
@@ -28,8 +28,8 @@
 - [ ] a denied case is covered
 - [ ] no document is created on denial
 **Read these anchors first:**
-- [`document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L119-L129)
-- [`mayan/apps/documents/tests/test_document_api.py`](../../mayan/apps/documents/tests/test_document_api.py)
+- [`document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L119-L129)
+- [`mayan/apps/documents/tests/test_document_api.py`](../../../mayan/apps/documents/tests/test_document_api.py)
 **Files likely touched:** `mayan/apps/documents/tests/test_document_api.py`
 **Implementation plan:** copy nearest upload test, remove permission grant, assert denial.
 **What could go wrong:** testing the wrong permission edge.
@@ -45,7 +45,7 @@
 **Acceptance criteria:**
 - [ ] note explains one-checkout-per-document
 - [ ] note mentions expiration or event semantics
-**Read these anchors first:** [`checkouts/models.py`](../../mayan/apps/checkouts/models.py#L68-L116)
+**Read these anchors first:** [`checkouts/models.py`](../../../mayan/apps/checkouts/models.py#L68-L116)
 
 ## Ticket 4: Add a docs note about delegated JS event handlers
 **Difficulty:** Easy
@@ -54,7 +54,7 @@
 **Story:** As a learner, I want to understand why delegated handlers exist here.
 **Why this is a good contribution:** teaches a transferable concept with low risk.
 **Acceptance criteria:** mention DOM replacement and delegated events.
-**Read these anchors first:** [`partial_navigation.js`](../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L273-L280)
+**Read these anchors first:** [`partial_navigation.js`](../../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L273-L280)
 
 ## Ticket 5: Add a test for `DocumentType.new_document()` rollback on file failure
 **Difficulty:** Medium
@@ -65,7 +65,7 @@
 **Acceptance criteria:**
 - [ ] force the child-file step to fail
 - [ ] assert parent document is removed
-**Read these anchors first:** [`document_type_models.py`](../../mayan/apps/documents/models/document_type_models.py#L146-L176)
+**Read these anchors first:** [`document_type_models.py`](../../../mayan/apps/documents/models/document_type_models.py#L146-L176)
 
 ## Ticket 6: Improve verification notes around missing local dependencies
 **Difficulty:** Easy
@@ -80,7 +80,7 @@
 **Skills practiced:** model validation tests
 **Story:** As a maintainer, I want expiration validation guarded by a regression test.
 **Why this is a good contribution:** simple invariant coverage.
-**Read these anchors first:** [`checkouts/models.py`](../../mayan/apps/checkouts/models.py#L68-L72)
+**Read these anchors first:** [`checkouts/models.py`](../../../mayan/apps/checkouts/models.py#L68-L72)
 
 ## Ticket 8: Add a small docs page comparing parsing vs OCR
 **Difficulty:** Easy
@@ -96,8 +96,8 @@
 **Story:** As a maintainer, I want the authorization boundary pinned by tests.
 **Why this is a good contribution:** security-focused and plausible.
 **Read these anchors first:**
-- [`document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L119-L129)
-- [`web_form_backends.py`](../../mayan/apps/sources/source_backends/web_form_backends.py#L42-L50)
+- [`document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L119-L129)
+- [`web_form_backends.py`](../../../mayan/apps/sources/source_backends/web_form_backends.py#L42-L50)
 
 ## Ticket 10: Add a docs table mapping major Celery tasks to triggering actions
 **Difficulty:** Easy
@@ -126,7 +126,7 @@
 **Skills practiced:** async failure testing
 **Story:** As a maintainer, I want finish-path OCR failures to remain visible.
 **Why this is a good contribution:** observability protection.
-**Read these anchors first:** [`ocr/tasks.py`](../../mayan/apps/ocr/tasks.py#L92-L131)
+**Read these anchors first:** [`ocr/tasks.py`](../../../mayan/apps/ocr/tasks.py#L92-L131)
 
 ## Ticket 14: Add a docs note about global login-required defaults
 **Difficulty:** Easy

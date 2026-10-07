@@ -8,7 +8,7 @@
 | API tests | `*_api.py` files | permission, status, payload contract |
 | View tests | `*_views.py` files | UI permissions and flow control |
 | Migration tests | `test_migrations.py`, CI migration target | upgrade safety |
-| Upgrade tests | [`.gitlab-ci.yml`](../../.gitlab-ci.yml#L179-L248) | previous-release compatibility |
+| Upgrade tests | [`.gitlab-ci.yml`](../../../.gitlab-ci.yml#L179-L248) | previous-release compatibility |
 
 ## What not to test
 

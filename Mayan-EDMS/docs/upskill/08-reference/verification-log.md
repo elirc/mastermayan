@@ -14,33 +14,40 @@ Date: `2026-05-18 16:37:38 -07:00`
 
 ## Files inspected
 
-- Root metadata: [`README.md`](../../README.md), [`CONTRIBUTING.md`](../../CONTRIBUTING.md), [`Makefile`](../../Makefile), [`tox.ini`](../../tox.ini), [`.gitlab-ci.yml`](../../.gitlab-ci.yml)
-- Runtime/bootstrap: [`manage.py`](../../manage.py), [`mayan/settings/base.py`](../../mayan/settings/base.py), [`mayan/celery.py`](../../mayan/celery.py), [`docker/docker-compose.yml`](../../docker/docker-compose.yml)
+- Root metadata: [`README.md`](../../../README.md), [`CONTRIBUTING.md`](../../../CONTRIBUTING.md), [`Makefile`](../../../Makefile), [`tox.ini`](../../../tox.ini), [`.gitlab-ci.yml`](../../../.gitlab-ci.yml)
+- Runtime/bootstrap: [`manage.py`](../../../manage.py), [`mayan/settings/base.py`](../../../mayan/settings/base.py), [`mayan/celery.py`](../../../mayan/celery.py), [`docker/docker-compose.yml`](../../../docker/docker-compose.yml)
 - Core flows:
-  [`mayan/apps/sources/source_backends/web_form_backends.py`](../../mayan/apps/sources/source_backends/web_form_backends.py),
-  [`mayan/apps/sources/tasks.py`](../../mayan/apps/sources/tasks.py),
-  [`mayan/apps/sources/models.py`](../../mayan/apps/sources/models.py),
-  [`mayan/apps/documents/models/document_type_models.py`](../../mayan/apps/documents/models/document_type_models.py),
-  [`mayan/apps/documents/models/document_models.py`](../../mayan/apps/documents/models/document_models.py),
-  [`mayan/apps/documents/models/document_file_models.py`](../../mayan/apps/documents/models/document_file_models.py)
+  [`mayan/apps/sources/source_backends/web_form_backends.py`](../../../mayan/apps/sources/source_backends/web_form_backends.py),
+  [`mayan/apps/sources/tasks.py`](../../../mayan/apps/sources/tasks.py),
+  [`mayan/apps/sources/models.py`](../../../mayan/apps/sources/models.py),
+  [`mayan/apps/documents/models/document_type_models.py`](../../../mayan/apps/documents/models/document_type_models.py),
+  [`mayan/apps/documents/models/document_models.py`](../../../mayan/apps/documents/models/document_models.py),
+  [`mayan/apps/documents/models/document_file_models.py`](../../../mayan/apps/documents/models/document_file_models.py)
 - Auth/permissions/API:
-  [`mayan/apps/acls/models.py`](../../mayan/apps/acls/models.py),
-  [`mayan/apps/rest_api/api_view_mixins.py`](../../mayan/apps/rest_api/api_view_mixins.py),
-  [`mayan/apps/documents/api_views/document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py),
-  [`mayan/apps/authentication/django_authentication_backends.py`](../../mayan/apps/authentication/django_authentication_backends.py),
-  [`mayan/apps/authentication/views/authentication_views.py`](../../mayan/apps/authentication/views/authentication_views.py)
+  [`mayan/apps/acls/models.py`](../../../mayan/apps/acls/models.py),
+  [`mayan/apps/rest_api/api_view_mixins.py`](../../../mayan/apps/rest_api/api_view_mixins.py),
+  [`mayan/apps/documents/api_views/document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py),
+  [`mayan/apps/authentication/django_authentication_backends.py`](../../../mayan/apps/authentication/django_authentication_backends.py),
+  [`mayan/apps/authentication/views/authentication_views.py`](../../../mayan/apps/authentication/views/authentication_views.py)
 - Async flows:
-  [`mayan/apps/file_metadata/methods.py`](../../mayan/apps/file_metadata/methods.py),
-  [`mayan/apps/file_metadata/tasks.py`](../../mayan/apps/file_metadata/tasks.py),
-  [`mayan/apps/document_parsing/methods.py`](../../mayan/apps/document_parsing/methods.py),
-  [`mayan/apps/document_parsing/tasks.py`](../../mayan/apps/document_parsing/tasks.py),
-  [`mayan/apps/ocr/tasks.py`](../../mayan/apps/ocr/tasks.py),
-  [`mayan/apps/document_indexing/handlers.py`](../../mayan/apps/document_indexing/handlers.py)
+  [`mayan/apps/file_metadata/methods.py`](../../../mayan/apps/file_metadata/methods.py),
+  [`mayan/apps/file_metadata/tasks.py`](../../../mayan/apps/file_metadata/tasks.py),
+  [`mayan/apps/document_parsing/methods.py`](../../../mayan/apps/document_parsing/methods.py),
+  [`mayan/apps/document_parsing/tasks.py`](../../../mayan/apps/document_parsing/tasks.py),
+  [`mayan/apps/ocr/tasks.py`](../../../mayan/apps/ocr/tasks.py),
+  [`mayan/apps/document_indexing/handlers.py`](../../../mayan/apps/document_indexing/handlers.py)
 - UI JavaScript:
-  [`mayan/apps/appearance/static/appearance/js/mayan_app.js`](../../mayan/apps/appearance/static/appearance/js/mayan_app.js),
-  [`mayan/apps/appearance/static/appearance/js/partial_navigation.js`](../../mayan/apps/appearance/static/appearance/js/partial_navigation.js),
-  [`mayan/apps/tags/static/tags/js/tags_form.js`](../../mayan/apps/tags/static/tags/js/tags_form.js),
-  [`mayan/apps/metadata/static/metadata/js/metadata_form.js`](../../mayan/apps/metadata/static/metadata/js/metadata_form.js)
+  [`mayan/apps/appearance/static/appearance/js/mayan_app.js`](../../../mayan/apps/appearance/static/appearance/js/mayan_app.js),
+  [`mayan/apps/appearance/static/appearance/js/partial_navigation.js`](../../../mayan/apps/appearance/static/appearance/js/partial_navigation.js),
+  [`mayan/apps/tags/static/tags/js/tags_form.js`](../../../mayan/apps/tags/static/tags/js/tags_form.js),
+  [`mayan/apps/metadata/static/metadata/js/metadata_form.js`](../../../mayan/apps/metadata/static/metadata/js/metadata_form.js)
+
+## 2026-10-06 accuracy pass
+
+Static re-check against `elirc/mastermayan` (commit `ddd91da`); nothing was installed or run.
+
+- 330 relative links in the sub-folder pages pointed one directory too shallow (`../../` from `docs/upskill/<module>/` lands in `docs/`, not the repo root). They now use `../../../`. Nine of them had silently resolved to the Sphinx `docs/Makefile` (134 lines) instead of the root `Makefile` (551 lines), which is why their line anchors looked out of range.
+- After the fix, all 395 links resolve and every line anchor is within its file. Spot-read anchors (`ocr/tasks.py#L30-L43` chord fan-out, `checkouts/models.py#L68-L72` expiry validation) match the text.
 
 ## Uncertainties
 

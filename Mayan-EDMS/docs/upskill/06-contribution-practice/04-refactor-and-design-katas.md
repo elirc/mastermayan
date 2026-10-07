@@ -14,7 +14,7 @@
 
 ## Kata: Split a large module
 
-- Candidate: [`mayan_app.js`](../../mayan/apps/appearance/static/appearance/js/mayan_app.js)
+- Candidate: [`mayan_app.js`](../../../mayan/apps/appearance/static/appearance/js/mayan_app.js)
 
 ## Kata: Improve type safety without static types
 

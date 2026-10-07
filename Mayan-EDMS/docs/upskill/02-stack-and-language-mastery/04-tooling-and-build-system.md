@@ -2,10 +2,10 @@
 
 ## Commands that matter most
 
-- Test orchestration: [`Makefile`](../../Makefile#L10-L96)
-- Docs build: [`Makefile`](../../Makefile#L130-L139)
-- Staging helpers: [`Makefile`](../../Makefile#L418-L431)
-- CI matrix: [`.gitlab-ci.yml`](../../.gitlab-ci.yml#L249-L346)
+- Test orchestration: [`Makefile`](../../../Makefile#L10-L96)
+- Docs build: [`Makefile`](../../../Makefile#L130-L139)
+- Staging helpers: [`Makefile`](../../../Makefile#L418-L431)
+- CI matrix: [`.gitlab-ci.yml`](../../../.gitlab-ci.yml#L249-L346)
 
 ## Mental model
 

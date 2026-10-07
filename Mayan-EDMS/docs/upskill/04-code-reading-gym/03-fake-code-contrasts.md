@@ -14,7 +14,7 @@ Better shape:
 document_file = document.file_new(file_object=file_obj, _user=request.user)
 ```
 
-Why: real code centralizes file lifecycle in [`document_models.py`](../../mayan/apps/documents/models/document_models.py#L189-L251).
+Why: real code centralizes file lifecycle in [`document_models.py`](../../../mayan/apps/documents/models/document_models.py#L189-L251).
 
 ## Missing permission filter
 
@@ -31,7 +31,7 @@ queryset = AccessControlList.objects.restrict_queryset(...)
 document_type = get_object_or_404(queryset=queryset, pk=document_type_id)
 ```
 
-Real pattern: [`document_api_views.py`](../../mayan/apps/documents/api_views/document_api_views.py#L119-L129)
+Real pattern: [`document_api_views.py`](../../../mayan/apps/documents/api_views/document_api_views.py#L119-L129)
 
 ## N+1 style repeated async work
 
@@ -43,7 +43,7 @@ for file in document.files.all():
 
 Better shape:
 
-- understand whether only `file_latest` should be processed, as the repo often does in [`file_metadata/methods.py`](../../mayan/apps/file_metadata/methods.py#L7-L12)
+- understand whether only `file_latest` should be processed, as the repo often does in [`file_metadata/methods.py`](../../../mayan/apps/file_metadata/methods.py#L7-L12)
 
 ## Stale state after partial DOM replacement
 
@@ -59,7 +59,7 @@ Better shape:
 $('body').on('click', 'a', function (event) { ... });
 ```
 
-Real pattern: [`partial_navigation.js`](../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L273-L280)
+Real pattern: [`partial_navigation.js`](../../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L273-L280)
 
 ## Swallowing errors
 
@@ -76,7 +76,7 @@ Better shape:
 - retry selected exceptions
 - persist error visibility
 
-Real pattern: [`ocr/tasks.py`](../../mayan/apps/ocr/tasks.py#L80-L89) and [`ocr/tasks.py`](../../mayan/apps/ocr/tasks.py#L119-L125)
+Real pattern: [`ocr/tasks.py`](../../../mayan/apps/ocr/tasks.py#L80-L89) and [`ocr/tasks.py`](../../../mayan/apps/ocr/tasks.py#L119-L125)
 
 ## Overusing ambient request data deep in domain logic
 
@@ -91,7 +91,7 @@ Better shape:
 - pass the narrow values you actually need
 - preserve audit context explicitly with `_user`
 
-Real pattern: [`document_type_models.py`](../../mayan/apps/documents/models/document_type_models.py#L138-L176)
+Real pattern: [`document_type_models.py`](../../../mayan/apps/documents/models/document_type_models.py#L138-L176)
 
 ## Casual public-contract change
 
@@ -104,7 +104,7 @@ Better shape:
 
 - preserve route shape unless you are intentionally versioning a contract
 
-Real contract surface: [`documents/urls.py`](../../mayan/apps/documents/urls.py#L528-L533)
+Real contract surface: [`documents/urls.py`](../../../mayan/apps/documents/urls.py#L528-L533)
 
 ## Side effects before durable state
 
@@ -118,7 +118,7 @@ Better shape:
 
 - persist first, then emit the event from the save lifecycle or just after it
 
-Real pattern: [`document_models.py`](../../mayan/apps/documents/models/document_models.py#L292-L317)
+Real pattern: [`document_models.py`](../../../mayan/apps/documents/models/document_models.py#L292-L317)
 
 ## Ignoring archive expansion blast radius
 
@@ -134,5 +134,5 @@ Better shape:
 - think about quotas and nested archive behavior
 
 Real examples:
-- [`document_models.py`](../../mayan/apps/documents/models/document_models.py#L205-L229)
-- [`sources/models.py`](../../mayan/apps/sources/models.py#L97-L124)
+- [`document_models.py`](../../../mayan/apps/documents/models/document_models.py#L205-L229)
+- [`sources/models.py`](../../../mayan/apps/sources/models.py#L97-L124)

@@ -4,12 +4,12 @@
 
 ### Happy path upload
 
-- Start from [`mayan/apps/sources/tests/test_web_form_source_api.py`](../../mayan/apps/sources/tests/test_web_form_source_api.py)
+- Start from [`mayan/apps/sources/tests/test_web_form_source_api.py`](../../../mayan/apps/sources/tests/test_web_form_source_api.py)
 - Assert `202` on enqueue and resulting document/file existence.
 
 ### Validation failure
 
-- Use checkout expiration rules from [`checkouts/models.py`](../../mayan/apps/checkouts/models.py#L68-L72)
+- Use checkout expiration rules from [`checkouts/models.py`](../../../mayan/apps/checkouts/models.py#L68-L72)
 
 ### Permission failure
 
@@ -18,7 +18,7 @@
 ### Cross-object permission failure
 
 - Use cabinet tests where cabinet access and document access are distinct:
-  [`mayan/apps/cabinets/tests/test_api.py`](../../mayan/apps/cabinets/tests/test_api.py)
+  [`mayan/apps/cabinets/tests/test_api.py`](../../../mayan/apps/cabinets/tests/test_api.py)
 
 ### Async side effect
 
@@ -26,7 +26,7 @@
 
 ### Migration behavior
 
-- Mirror existing style in [`mayan/apps/documents/tests/test_migrations.py`](../../mayan/apps/documents/tests/test_migrations.py)
+- Mirror existing style in [`mayan/apps/documents/tests/test_migrations.py`](../../../mayan/apps/documents/tests/test_migrations.py)
 
 ## Commands
 

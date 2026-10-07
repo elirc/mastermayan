@@ -13,8 +13,8 @@
 **Reproduction:** POST upload returns `202`, but no document shows up.
 **First question:** Is the bug in request-side enqueue or worker-side processing?
 **Narrowing path:**
-1. Check request path in [`web_form_backends.py`](../../mayan/apps/sources/source_backends/web_form_backends.py#L57-L72).
-2. Check worker path in [`sources/tasks.py`](../../mayan/apps/sources/tasks.py#L64-L103).
+1. Check request path in [`web_form_backends.py`](../../../mayan/apps/sources/source_backends/web_form_backends.py#L57-L72).
+2. Check worker path in [`sources/tasks.py`](../../../mayan/apps/sources/tasks.py#L64-L103).
 3. Inspect temp upload cleanup assumptions.
 **Useful probes:**
 - log whether `SharedUploadedFile` row still exists
@@ -51,7 +51,7 @@
 2. Verify cached page images exist.
 3. Inspect lock and DB health.
 **Useful probes:**
-- inspect retryable exceptions in [`ocr/tasks.py`](../../mayan/apps/ocr/tasks.py#L80-L89)
+- inspect retryable exceptions in [`ocr/tasks.py`](../../../mayan/apps/ocr/tasks.py#L80-L89)
 **Likely root causes:**
 - cache image missing
 - lock contention
@@ -68,7 +68,7 @@
 2. Verify expiration expectations.
 3. Check for any path bypassing model `save()`.
 **Useful probes:**
-- inspect `DocumentCheckout.save()` invariant in [`checkouts/models.py`](../../mayan/apps/checkouts/models.py#L100-L116)
+- inspect `DocumentCheckout.save()` invariant in [`checkouts/models.py`](../../../mayan/apps/checkouts/models.py#L100-L116)
 **Likely root causes:**
 - valid existing checkout
 - concurrent request race
@@ -85,8 +85,8 @@
 2. Inspect whether latest-response-wins is preserved.
 3. Check whether event binding survived DOM replacement.
 **Useful probes:**
-- inspect request cancellation in [`partial_navigation.js`](../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L107-L115)
-- inspect error rendering in [`partial_navigation.js`](../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L201-L247)
+- inspect request cancellation in [`partial_navigation.js`](../../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L107-L115)
+- inspect error rendering in [`partial_navigation.js`](../../../mayan/apps/appearance/static/appearance/js/partial_navigation.js#L201-L247)
 **Likely root causes:**
 - race between responses
 - delegated handler regression
